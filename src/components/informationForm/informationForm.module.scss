@@ -1,0 +1,26 @@
+.wrap {
+  display: flex;
+  .form {
+    .line {
+
+      .label {
+        background: springgreen;
+        display: inline-block;
+        margin-right: 5rem;
+      }
+    }
+
+  }
+  .boxForm {
+    width: 33.3%;
+    border-radius:6px;
+    border: 1px solid #8ca9d7;
+  }
+
+}
+
+
+// form common
+.errorMsg {
+  color: red;
+}

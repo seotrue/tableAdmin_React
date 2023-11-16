@@ -5,11 +5,10 @@ const Backdrop = () => {
     return <div className={styles.overlay} />
 }
 
-const Index = ({ close, children, data }) => {
+const ModalLayout = ({ close, children }) => {
     const closeModal = () => {
         close()
     }
-        console.log(children,'children')
     return (
         <>
             {ReactDom.createPortal(<Backdrop />, document.getElementById('backdrop-root'))}
@@ -17,13 +16,7 @@ const Index = ({ close, children, data }) => {
                 <div className={styles.modal}>
                     <button onClick={closeModal}>취소</button>
                     {children && children}
-                    {data && (
-                      <>
-                          <h3>{data.title}</h3>
-                          <div>{data.data}</div>
-                      </>
 
-                    )}
                 </div>,
                 document.getElementById('modal-root'),
             )}
@@ -31,4 +24,4 @@ const Index = ({ close, children, data }) => {
     )
 }
 
-export default Index
+export default ModalLayout

@@ -1,9 +1,12 @@
 module.exports = {
   env: {
-    browser: true,
+    browser: false,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
+  extends: ['react-app', 'plugin:prettier/recommended', 'eslint:recommended'],
+  rules: {
+    'no-console': 'error',
+  },
   overrides: [
     {
       env: {
@@ -21,8 +24,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/no-unused-prop-types': ['off'],
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 0,
+    'react/prop-types': 'off',
   },
-}
+};

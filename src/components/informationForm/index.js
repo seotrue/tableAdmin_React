@@ -33,14 +33,14 @@ const SUPPLY_OPTIONS = [
   { value: 'EA', label: 'EA' },
 ];
 
-const informationForm = ({ orderCopyAction }) => {
+const InformationForm = ({ orderCopyAction }) => {
   const loadPlace = useRecoilValue(loadPlaceAtom);
   const setLoadPlace = useSetRecoilState(loadPlaceAtom);
   const selectedOrderCopy = useRecoilValue(selectedOrderCopyAtom);
   const deliveryOrderList = useRecoilValue(deliveryOrderListAtom);
 
-  const [name, _, setName] = useInput('');
-  const [phone, _2, setPhone] = useInput('');
+  const [name, , setName] = useInput('');
+  const [phone, , setPhone] = useInput('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [itemOptions, setItemOptions] = useState(undefined);
@@ -129,8 +129,10 @@ const informationForm = ({ orderCopyAction }) => {
     }
 
     console.log(loadPlace, 'loadPlace ::::::::::::::');
+    let loadAddress, loadDate, loadName;
     // 상차지 정보 유효성 체크
-    const { address = loadAddress, date = loadDate, name = loadName } = loadPlace;
+    // eslint-disable-next-line no-undef,no-const-assign
+    ({ address = loadAddress, date = loadDate, name = loadName } = loadPlace);
     if (isEmpty(loadAddress) || isEmpty(loadDate) || isEmpty(loadName)) result = false;
 
     return {
@@ -158,7 +160,7 @@ const informationForm = ({ orderCopyAction }) => {
     const val = event.target.value
       .replace(/[^0-9]/g, '')
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
-      .replace(/(\-{1,2})$/g, '');
+      .replace(/(-{1,2})$/g, '');
     const regPhone = /^\d{3}-\d{4}-\d{4}$/;
 
     if (!regPhone.test(event.target.value)) errorMsg = '알맞는 핸드폰 번호 형식을 입력 해주세요';
@@ -347,6 +349,7 @@ const informationForm = ({ orderCopyAction }) => {
 
         {/* 상하차 정보 폼 */}
         {loadPlace.map((box, idx) => {
+          // eslint-disable-next-line no-restricted-globals,no-undef
           return <LoadForm cx={cx} key={self.crypto.randomUUID()} idx={idx} />;
         })}
 
@@ -377,4 +380,4 @@ const informationForm = ({ orderCopyAction }) => {
   );
 };
 
-export default informationForm;
+export default InformationForm;

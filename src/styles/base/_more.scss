@@ -32,8 +32,6 @@ a {
 select,
 input,
 textarea {
-  // @miriya (2022-03-03): 사파리에서 줌 시작되지 않는 최소 사이즈
-  // https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone
   font-size: 16px;
 }
 
@@ -42,21 +40,76 @@ button {
   -webkit-appearance: none;
 }
 
-input::-webkit-contacts-auto-fill-button {
-  // @miriya (2019-06-17): 사파리에서 자동완성 사람 아이콘 없앰
-  position: absolute;
-  right: 0;
-  display: none !important;
-  pointer-events: none;
-  visibility: hidden;
-}
-
 input {
   background-color: transparent;
   background-image: none !important;
   border: 0;
 }
 
+input[type='text'] {
+  border-radius: 4px;
+  --saf-0: rgba(var(--sk_foreground_high_solid, 134, 134, 134), 1);
+  border: 1px solid #adc6ea;
+  transition: border 80ms ease-out, box-shadow 80ms ease-out;
+  box-sizing: border-box;
+  margin: 0;
+  height: 36px;
+  color: #444444;
+  padding: 8px 20px 7px;
+  font-size: 16px;
+  line-height: 1.33333333;
+
+  &:focus {
+    outline: none;
+    color: #444444;
+    border: 1px solid #253798;
+  }
+
+  &::placeholder {
+    color: #8ca9d7;
+    font-size: 14px;
+  }
+
+  &:disabled {
+    color: #8ca9d7;
+    background: #eeeeee;
+  }
+}
+
+input[type='checkbox'] {
+  display: none;
+  width: 20px;
+  height: 20px;
+
+  & + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border: 1px solid #c6dafd;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background: #ffffff;
+    cursor: pointer;
+    line-height: 22px;
+    vertical-align: middle;
+
+    &:hover {
+      border: 1px solid #85a2da;
+    }
+  }
+
+  &:checked + label {
+    display: inline-block;
+    border: 1px solid navy;
+    background: #1f315b;
+    cursor: pointer;
+
+    & + span {
+      color: #253798;
+    }
+  }
+}
 button {
   cursor: pointer;
   user-select: none;
@@ -73,3 +126,4 @@ input[type='file']::file-selector-button,
 button {
   color: initial;
 } // override safari default blue
+
