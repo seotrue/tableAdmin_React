@@ -1,5 +1,5 @@
-import cx from 'classnames/bind'
-import styles from './index.scss'
+import cx from 'classnames/bind';
+import styles from './index.scss';
 
-export default styles
-export { cx }
+export default styles;
+export { cx };

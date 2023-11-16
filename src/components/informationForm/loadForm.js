@@ -1,4 +1,4 @@
-import { cloneDeep, isNull } from 'lodash';
+import { cloneDeep, isEmpty, isNull } from 'lodash';
 import { useState, useCallback, useEffect } from 'react';
 import useInput from '../../hook/useInput';
 import { CONSTANT } from '../../constant/constant';
@@ -17,10 +17,19 @@ const LoadForm = ({ cx, idx }) => {
   const [errorMsg, setErrorMsg] = useState({
     name: null,
     date: null,
-    detailOptions: null,
-    supplyOptions: null,
     address: null,
   });
+
+  useEffect(() => {
+    if (isEmpty(loadPlace.address) || isEmpty(loadPlace.date) || isEmpty(loadPlace.name)) {
+      const errMsh = '값을 입력 해주세요';
+      setErrorMsg({
+        name: errMsh,
+        date: errMsh,
+        address: errMsh,
+      });
+    }
+  }, [loadPlace]);
 
   console.log();
   const handleComplete = useCallback(
@@ -75,7 +84,7 @@ const LoadForm = ({ cx, idx }) => {
           <span>
             <input type="text" value={name} onChange={(event) => onChangeName(event)} onBlur={handleBlurName} />
           </span>
-          <span>{!isNull(errorMsg.name) && <span className={cx('errorMsg')}>{errorMsg.name}</span>}</span>
+          {!isNull(errorMsg.name) && <span className={cx('errorMsg')}>{errorMsg.name}</span>}
         </li>
         <li>
           <span>날짜</span>
@@ -86,6 +95,7 @@ const LoadForm = ({ cx, idx }) => {
               dateFormat={CONSTANT.FORMAT.DATE_ONLY_HYPHEN}
             />
           </span>
+          {!isNull(errorMsg.date) && <span className={cx('errorMsg')}>{errorMsg.date}</span>}
         </li>
         <li>
           <span>상차지</span>
@@ -95,6 +105,7 @@ const LoadForm = ({ cx, idx }) => {
             value={loadPlace[idx].address}
             onClick={(event) => setIsModalOpen((prev) => !prev)}
           />
+          {!isNull(errorMsg.address) && <span className={cx('errorMsg')}>{errorMsg.address}</span>}
         </li>
       </ul>
       {isModalOpen && (

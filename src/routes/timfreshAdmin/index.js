@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 import { deliveryOrderListAtom } from 'atom/Atom';
 import { cx } from 'styles';
-import styles from './timfreshAdmin.module.scss';
 import { useQuery } from 'react-query';
 
 async function fetchDeliveryOrderList() {

@@ -128,7 +128,6 @@ const InformationForm = ({ orderCopyAction }) => {
       };
     }
 
-    console.log(loadPlace, 'loadPlace ::::::::::::::');
     let loadAddress, loadDate, loadName;
     // 상차지 정보 유효성 체크
     // eslint-disable-next-line no-undef,no-const-assign

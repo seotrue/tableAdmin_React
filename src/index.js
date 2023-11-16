@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom/client';
 import Routes from './routes/index';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import {ReactQueryDevtools} from 'react-query/devtools'
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const queryClient = new QueryClient();
+// eslint-disable-next-line no-undef
 const root = ReactDOM.createRoot(document.getElementById('root'));
 if (process.env.NODE_ENV === 'development') {
-    const { worker } = require('./mocks/browser')
-    worker.start()
+  const { worker } = require('./mocks/browser');
+  worker.start();
 }
+
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Routes />
-      <ReactQueryDevtools/>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>,
 );
